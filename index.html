@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Convertidor de Audio Neon</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #1a1a1a;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+        .neon-border {
+            border: 2px solid #0f0;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.5), inset 0 0 10px rgba(0, 255, 0, 0.8);
+            background: rgba(255, 255, 255, 0.05);
+            max-width: 400px;
+            text-align: center;
+        }
+        h2 {
+            color: #0f0;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px rgba(0, 255, 0, 0.8);
+        }
+        label {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+            display: block;
+            color: #0af;
+            text-shadow: 0 0 5px rgba(0, 255, 255, 0.7);
+        }
+        input[type="file"], select, button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 15px;
+            border-radius: 5px;
+            background: transparent;
+            color: #fff;
+            font-size: 1.1rem;
+            border: 2px solid #0af;
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.5), inset 0 0 5px rgba(0, 255, 255, 0.8);
+            transition: all 0.3s ease;
+        }
+        input[type="file"]:hover, select:hover, button:hover {
+            background-color: rgba(0, 255, 255, 0.1);
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.8), inset 0 0 10px rgba(0, 255, 255, 1);
+        }
+        button {
+            background-color: #00ff66;
+            border-color: #00ff66;
+            color: #000;
+            font-size: 1.3rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #00cc52;
+            box-shadow: 0 0 20px rgba(0, 255, 102, 0.8), inset 0 0 10px rgba(0, 255, 102, 1);
+        }
+        #status {
+            margin-top: 20px;
+            font-size: 1rem;
+            color: #ff00ff;
+            text-shadow: 0 0 5px rgba(255, 0, 255, 0.7);
+        }
+        #downloadLink {
+            display: none;
+            margin-top: 20px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #00ff66;
+            text-shadow: 0 0 10px rgba(0, 255, 102, 0.8);
+            background-color: rgba(0, 255, 102, 0.1);
+            padding: 10px;
+            border: 2px solid #00ff66;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        #downloadLink:hover {
+            background-color: rgba(0, 255, 102, 0.2);
+            box-shadow: 0 0 20px rgba(0, 255, 102, 0.8), inset 0 0 10px rgba(0, 255, 102, 1);
+        }
+        /* Fondo animado */
+        body::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background-image: conic-gradient(from 180deg at 50% 50%, rgba(0, 255, 255, 0.3), rgba(255, 0, 255, 0.3), rgba(255, 255, 0, 0.3), rgba(0, 255, 255, 0.3));
+            animation: rotate 10s linear infinite;
+            z-index: -1;
+        }
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="neon-border">
+        <h2>Convertidor de Audio Neon</h2>
+
+        <label for="audioInput">Selecciona un archivo de audio:</label>
+        <input type="file" id="audioInput" accept="audio/*">
+
+        <label for="format">Formato de salida:</label>
+        <select id="format">
+            <option value="mp3">MP3</option>
+            <option value="ogg">OGG</option>
+            <option value="wav">WAV</option>
+            <option value="flac">FLAC</option>
+            <option value="aac">AAC</option>
+        </select>
+
+        <button onclick="convertAudio()">Convertir Audio</button>
+
+        <p id="status"></p>
+        <a id="downloadLink" download>Descargar Archivo Convertido</a>
+    </div>
+
+    <script>
+        async function convertAudio() {
+            const inputFile = document.getElementById('audioInput').files[0];
+            const format = document.getElementById('format').value;
+            const statusText = document.getElementById('status');
+            const downloadLink = document.getElementById('downloadLink');
+
+            if (!inputFile) {
+                statusText.textContent = 'Por favor, selecciona un archivo de audio.';
+                return;
+            }
+
+            statusText.textContent = 'Convirtiendo... Por favor, espera.';
+
+            // Aquí va tu lógica de conversión de audio
+            // Simulación de conversión para el ejemplo
+            setTimeout(() => {
+                downloadLink.style.display = 'block';
+                downloadLink.href = '#'; // Simulación de enlace
+                downloadLink.textContent = `Descargar archivo convertido (${format.toUpperCase()})`;
+                downloadLink.download = `ElArdilla.${format}`;
+                statusText.textContent = 'Conversión completa.';
+            }, 2000);
+        }
+    </script>
+
+</body>
+</html>
+
